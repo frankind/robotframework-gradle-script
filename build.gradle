@@ -1,0 +1,28 @@
+apply plugin: 'java'
+
+repositories {
+  mavenCentral()
+}
+
+dependencies {
+    runtime group: 'org.robotframework', name: 'robotframework', version: '2.8.7'
+    runtime group: 'com.github.markusbernhardt', name:'robotframework-selenium2library-java', version:'1.4.0.7'
+}
+
+clean{
+    delete  'target'
+}
+
+task(run, type: JavaExec) {
+    main = 'org.robotframework.RobotFramework'
+    classpath = sourceSets.main.runtimeClasspath
+    args '--variable', 'BROWSER:gc'
+    args '--outputdir', 'target'
+    args 'tests'
+    
+    
+}
+
+
+defaultTasks 'run'
+
